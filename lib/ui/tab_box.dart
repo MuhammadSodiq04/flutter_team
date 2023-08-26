@@ -25,7 +25,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
       ),
       child: Scaffold(
         body: IndexedStack(
-          index: context.watch<NavbarCubit>().state,
+          index: context.watch<TabBoxCubit>().state,
           children: _pages,
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -71,9 +71,9 @@ class _TabBarScreenState extends State<TabBarScreen> {
               label: '',
             ),
           ],
-          currentIndex: context.watch<NavbarCubit>().state,
+          currentIndex: context.watch<TabBoxCubit>().state,
           onTap: (index) {
-            context.read<NavbarCubit>().updateScreen(index);
+            context.read<TabBoxCubit>().updateScreen(index);
           },
         ),
       ),

@@ -47,12 +47,12 @@ class ApiService {
       {required String username, required String password}) async {
     Response response;
     try {
-      response = await _dio.post("/auth/login",
+      response = await _dio.post("/accounts/login",
           data: {"username": username, "password": password});
       if ((response.statusCode! >= 200) && (response.statusCode! < 300)) {
         return UniversalData(data: {
-          "token": response.data["token"],
-          "status": response.data["status"]
+          "access_token": response.data["access_token"],
+          "refresh_token": response.data["refresh_token"]
         });
       }
       return UniversalData(error: "Other Error");
@@ -95,10 +95,10 @@ class ApiService {
     Response response;
 
     try {
-      response = await _dio.get("/auth/users/me",
-          options: Options(headers: {"Authorization": "Bearer Token:$token"}));
+      response = await _dio.get("/accounts/me");
+
       if ((response.statusCode! >= 200) && (response.statusCode! < 300)) {
-        return UniversalData(data: UserModel.fromJson(response.data));
+        return UniversalData(data: RegisterUserModel.fromJson(response.data));
       }
       return UniversalData(error: "Other Error");
     } on DioException catch (e) {

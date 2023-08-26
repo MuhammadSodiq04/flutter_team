@@ -15,10 +15,12 @@ class AuthErrorState extends AuthState {
   AuthErrorState({required this.errorText});
 }
 
-class AuthSendCodeSuccessState extends AuthState {}
 class AuthRegisteredState extends AuthState {}
 
-class AuthConfirmCodeSuccessState extends AuthState {}
-class AuthConfirmCodeAlreadythereState extends AuthState {}
 
-class AuthLoggedState extends AuthState {}
+
+class AuthLoggedState extends AuthState {
+  UserModel? userModel;
+
+  AuthLoggedState([this.userModel]);
+}

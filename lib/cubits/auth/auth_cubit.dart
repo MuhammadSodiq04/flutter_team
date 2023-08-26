@@ -13,7 +13,7 @@ import 'package:meta/meta.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit({required this.authRepository}) : super(AuthInitial());
+  AuthCubit({required this.authRepository}) : super(AuthInitial()) {}
 
   final AuthRepository authRepository;
 
@@ -27,14 +27,14 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> logOutUser() async {
-    await StorageRepository.deleteString("token");
+    await StorageRepository.deleteString("access_token");
     emit(AuthUnAuthenticatedState());
   }
 
-  /*Future<void> signInWithPasswordAndGmail(String gmail, String password) async {
+  Future<void> loginUser(String username, String password) async {
     emit(AuthLoadingState());
     UniversalData universalData = await authRepository.loginUser(
-      gmail: gmail,
+      username: username,
       password: password,
     );
     if (universalData.error.isEmpty) {
@@ -42,32 +42,26 @@ class AuthCubit extends Cubit<AuthState> {
     } else {
       emit(AuthErrorState(errorText: universalData.error));
     }
-  }*/
+  }
 
-
+  Future<void> getUser() async {
+    emit(AuthLoadingState());
+    UniversalData universalData = await authRepository.getUser();
+    if (universalData.error.isEmpty) {
+      emit(AuthLoggedState(universalData.data as UserModel));
+    } else {
+      emit(AuthErrorState(errorText: universalData.error));
+    }
+  }
 
   Future<void> registerUser(RegisterUserModel registerUserModel) async {
     emit(AuthLoadingState());
     UniversalData universalData =
-    await authRepository.register(registerUserModel: registerUserModel);
+        await authRepository.register(registerUserModel: registerUserModel);
     if (universalData.error.isEmpty) {
       emit(AuthRegisteredState());
     } else {
       emit(AuthErrorState(errorText: universalData.error));
     }
   }
-
-  /*Future<void> sendConfirmationCode(String code) async {
-    emit(AuthLoadingState());
-    UniversalData universalData = await authRepository.confirmCode(code: code);
-    if (universalData.error.isEmpty) {
-      emit(AuthConfirmCodeSuccessState());
-    } else {
-      if (universalData.error ==
-          "You are already authorized! Siz allaqachon avtorizatsiya qilgansiz!") {
-        emit(AuthConfirmCodeAlreadythereState());
-      }
-      emit(AuthErrorState(errorText: universalData.error));
-    }
-  }*/
 }
