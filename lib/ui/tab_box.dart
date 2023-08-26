@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_team/cubits/tab_cubit/tab_cubit.dart';
+import 'package:flutter_team/ui/categories_screen/category_screen.dart';
+import 'package:flutter_team/ui/home_screen/home_screen.dart';
+import 'package:flutter_team/ui/home_screen/widgets/create_ads_screen.dart';
+import 'package:flutter_team/ui/profile_screen/profile_screen.dart';
 
+import '../utils/icons.dart';
 
 class TabBarScreen extends StatefulWidget {
   const TabBarScreen({Key? key}) : super(key: key);
@@ -12,8 +18,10 @@ class TabBarScreen extends StatefulWidget {
 
 class _TabBarScreenState extends State<TabBarScreen> {
   final List<Widget> _pages = [
-
-
+    HomeScreen(),
+    Placeholder(),
+    CategoryScreen(),
+    ProfileScreen(),
   ];
 
   @override
@@ -33,42 +41,22 @@ class _TabBarScreenState extends State<TabBarScreen> {
           unselectedItemColor: Colors.black12,
           selectedItemColor: Colors.black,
           backgroundColor: Colors.teal,
-          items: const <BottomNavigationBarItem>[
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-              ),
-              label: '',
+              icon: SvgPicture.asset(AppImages.home),
+              label: 'Главная',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.web,
-              ),
-              label: '',
+              icon: SvgPicture.asset(AppImages.search),
+              label: 'Поиск',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.article,
-              ),
-              label: '',
+              icon: SvgPicture.asset(AppImages.category),
+              label: 'Категории',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.view_cozy,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.bookmark,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person,
-              ),
-              label: '',
+              icon: SvgPicture.asset(AppImages.profile),
+              label: 'Профиль',
             ),
           ],
           currentIndex: context.watch<TabBoxCubit>().state,

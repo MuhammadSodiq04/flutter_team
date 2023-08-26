@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_team/data/models/category_model/category_model.dart';
 import 'package:flutter_team/data/models/register_user.dart';
 import 'package:flutter_team/data/models/universal_data.dart';
 import 'package:flutter_team/data/models/user_model.dart';
@@ -111,4 +112,24 @@ class ApiService {
       return UniversalData(error: error.toString());
     }
   }
+  Future<UniversalData> getAllCategory() async {
+    Response response;
+
+    try {
+      response = await _dio.get("/store/categories-with-childs");
+      if ((response.statusCode! >= 200) && (response.statusCode! < 300)) {
+        return UniversalData(data: (response.data as List).map((e) => CategoryModel.fromJson(e)));
+      }
+      return UniversalData(error: "Other Error");
+    } on DioException catch (e) {
+      if (e.response != null) {
+        return UniversalData(error: e.response!.data["message"]);
+      } else {
+        return UniversalData(error: e.message!);
+      }
+    } catch (error) {
+      return UniversalData(error: error.toString());
+    }
+  }
 }
+

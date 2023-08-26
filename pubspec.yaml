@@ -20,6 +20,7 @@ dependencies:
   cached_network_image: ^3.2.3
   dio: ^5.3.2
   lottie: ^2.5.0
+  shimmer: ^3.0.0
   sqflite: ^2.3.0
   image_picker: ^1.0.1
   pinput: ^3.0.0
