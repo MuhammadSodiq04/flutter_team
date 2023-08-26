@@ -1,7 +1,7 @@
 // const String adminEmail = "admin@gmail.com";
 // const defaultImageConstant = "Select Image";
 
-const baseUrl = "https://e-work.up.railway.app";
+const baseUrl = "http://localhost/api/v1/";
 
 class TimeOutConstants {
   static int sendTimeout = 60;
