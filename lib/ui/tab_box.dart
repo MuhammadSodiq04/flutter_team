@@ -1,6 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_team/cubits/tab_cubit/tab_cubit.dart';
+import 'package:flutter_team/ui/category/category_screen.dart';
+import 'package:flutter_team/ui/home/home_screen.dart';
+import 'package:flutter_team/ui/profile_screen/profile_screen.dart';
+import 'package:flutter_team/utils/colors.dart';
+import 'package:flutter_team/utils/icons.dart';
 
 
 class TabBarScreen extends StatefulWidget {
@@ -12,6 +20,10 @@ class TabBarScreen extends StatefulWidget {
 
 class _TabBarScreenState extends State<TabBarScreen> {
   final List<Widget> _pages = [
+    HomeScreen(),
+    CategoryScreen(),
+    CategoryScreen(),
+    ProfileScreen(),
 
 
   ];
@@ -30,45 +42,36 @@ class _TabBarScreenState extends State<TabBarScreen> {
         ),
         bottomNavigationBar: BottomNavigationBar(
           elevation: 10,
-          unselectedItemColor: Colors.black12,
+          unselectedItemColor: AppColors.C_676A7D,
           selectedItemColor: Colors.black,
+          selectedLabelStyle: TextStyle(
+            fontFamily: "Inter",
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w600,
+            color: AppColors.C_16191D
+          ),unselectedLabelStyle: TextStyle(
+            fontFamily: "Inter",
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w600,
+            color: AppColors.C_676A7D
+          ),
           backgroundColor: Colors.teal,
-          items: const <BottomNavigationBarItem>[
+          items:  <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-              ),
-              label: '',
+              icon: SvgPicture.asset(AppImages.home),
+              label: 'Главная',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.web,
-              ),
-              label: '',
+              icon: SvgPicture.asset(AppImages.search),
+              label: 'Поиск',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.article,
-              ),
-              label: '',
+              icon:  SvgPicture.asset(AppImages.category),
+              label: 'Категории',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.view_cozy,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.bookmark,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person,
-              ),
-              label: '',
+              icon:  SvgPicture.asset(AppImages.profile),
+              label: 'Профиль',
             ),
           ],
           currentIndex: context.watch<NavbarCubit>().state,
