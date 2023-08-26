@@ -1,29 +1,22 @@
+import 'package:flutter_team/data/models/register_user.dart';
+
 import '../../../local/storage_repository/storage_repository.dart';
 import '../../models/universal_data.dart';
 import '../../network/api_service.dart';
 
-class LoginRepository {
+class AuthRepository {
   final ApiService apiService;
 
-  LoginRepository({required this.apiService});
+  AuthRepository({required this.apiService});
 
   Future<UniversalData> loginUser(
       {required String username, required String password}) async {
     return apiService.loginUser(username: username, password: password);
   }
 
-  Future<UniversalData> loginEdit(
-      {required String name,
-      required String phone,
-      required String username,
-      required String token,
-      required String password}) async {
-    return apiService.loginEdit(
-        name: name,
-        phone: phone,
-        username: username,
-        password: password,
-        token: token);
+  Future<UniversalData> register(
+      {required RegisterUserModel registerUserModel}) async {
+    return apiService.registerUser(registerUserModel: registerUserModel);
   }
 
   Future<UniversalData> getUser() async {

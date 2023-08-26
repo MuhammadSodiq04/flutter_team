@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import '../../local/storage_repository/storage_repository.dart';
-import '../../utils/constants.dart';
-import '../models/login_model.dart';
-import '../models/universal_data.dart';
+import 'package:flutter_team/data/models/register_user.dart';
+import 'package:flutter_team/data/models/universal_data.dart';
+import 'package:flutter_team/data/models/user_model.dart';
+import 'package:flutter_team/utils/constants.dart';
 
 class ApiService {
   final _dio = Dio(
@@ -67,29 +67,17 @@ class ApiService {
     }
   }
 
-  Future<UniversalData> loginEdit(
-      {required String name,
-        required String phone,
-        required String username,
-        required String password,
-        required String token}) async {
+  Future<UniversalData> registerUser(
+      {required RegisterUserModel registerUserModel}) async {
     Response response;
     try {
-      response = await _dio.post("/auth/users/first/edit",
+      response = await _dio.post("/accounts/seller/registration",
           options: Options(
-            headers: {
-              "Authorization": "Bearer $token",
-              "Content-Type": "application/json"
-            },
+            headers: {"Content-Type": "application/json"},
           ),
-          data: {
-            "name": name,
-            "phone": phone,
-            "username": username,
-            "password": password
-          });
+          data: registerUserModel.toJson());
       if ((response.statusCode! >= 200) && (response.statusCode! < 300)) {
-        return UniversalData(data: LoginModel.fromJson(response.data));
+        return UniversalData(data: UserModel.fromJson(response.data));
       }
       return UniversalData(error: "Other Error");
     } on DioException catch (e) {
@@ -105,12 +93,12 @@ class ApiService {
 
   Future<UniversalData> getUser() async {
     Response response;
-    String token = StorageRepository.getString("token");
+
     try {
       response = await _dio.get("/auth/users/me",
           options: Options(headers: {"Authorization": "Bearer Token:$token"}));
       if ((response.statusCode! >= 200) && (response.statusCode! < 300)) {
-        return UniversalData(data: LoginModel.fromJson(response.data));
+        return UniversalData(data: UserModel.fromJson(response.data));
       }
       return UniversalData(error: "Other Error");
     } on DioException catch (e) {
