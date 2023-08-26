@@ -36,7 +36,38 @@ class _CategoryScreenState extends State<CategoryScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            CategoryWidgets()
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 6.h),
+              child: const CategoryWidgets(
+                icon: AppImages.men,
+                text: "Для женщин",
+                subtext: "4 147 объявлений",
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 6.h),
+              child: const CategoryWidgets(
+                icon: AppImages.men,
+                text: "Для женщин",
+                subtext: "4 147 объявлений",
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 6.h),
+              child: const CategoryWidgets(
+                icon: AppImages.men,
+                text: "Для женщин",
+                subtext: "4 147 объявлений",
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 6.h),
+              child: const CategoryWidgets(
+                icon: AppImages.men,
+                text: "Для женщин",
+                subtext: "4 147 объявлений",
+              ),
+            ),
           ],
         ),
       ),

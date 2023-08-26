@@ -5,7 +5,11 @@ import 'package:flutter_team/utils/colors.dart';
 import 'package:flutter_team/utils/icons.dart';
 
 class CategoryWidgets extends StatelessWidget {
-  const CategoryWidgets({super.key});
+  const CategoryWidgets({super.key, required this.icon, required this.text, required this.subtext});
+
+  final String icon;
+  final String text;
+  final String subtext;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +47,7 @@ class CategoryWidgets extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Для женщин",
+                            text,
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16.sp,
@@ -51,7 +55,7 @@ class CategoryWidgets extends StatelessWidget {
                                 fontFamily: "Inter"),
                           ),
                           Text(
-                            "4 147 объявлений",
+                            subtext,
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16.sp,
@@ -89,7 +93,7 @@ class CategoryWidgets extends StatelessWidget {
                 height: 64.h,
                 width: 64.h,
                 child: Center(
-                  child: SvgPicture.asset(AppImages.men),
+                  child: SvgPicture.asset(icon),
                 ),
               ),
             ),
