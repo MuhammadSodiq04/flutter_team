@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_team/data/models/category/category_model.dart';
 import 'package:flutter_team/data/models/register_user.dart';
 import 'package:flutter_team/data/models/universal_data.dart';
 import 'package:flutter_team/data/models/user_model.dart';
@@ -99,6 +100,28 @@ class ApiService {
           options: Options(headers: {"Authorization": "Bearer Token:$token"}));
       if ((response.statusCode! >= 200) && (response.statusCode! < 300)) {
         return UniversalData(data: UserModel.fromJson(response.data));
+      }
+      return UniversalData(error: "Other Error");
+    } on DioException catch (e) {
+      if (e.response != null) {
+        return UniversalData(error: e.response!.data["message"]);
+      } else {
+        return UniversalData(error: e.message!);
+      }
+    } catch (error) {
+      return UniversalData(error: error.toString());
+    }
+  }
+
+  //-------------Category------------
+
+  Future<UniversalData> getAllCategory() async {
+    Response response;
+
+    try {
+      response = await _dio.get("/store/categories-with-childs");
+      if ((response.statusCode! >= 200) && (response.statusCode! < 300)) {
+        return UniversalData(data: (response.data as List).map((e) => CategoryModel.fromJson(e)));
       }
       return UniversalData(error: "Other Error");
     } on DioException catch (e) {

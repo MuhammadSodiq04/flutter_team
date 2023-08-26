@@ -1,4 +1,4 @@
-import 'package:flutter_team/data/models/register_user.dart';
+  import 'package:flutter_team/data/models/register_user.dart';
 
 import '../../../local/storage_repository/storage_repository.dart';
 import '../../models/universal_data.dart';

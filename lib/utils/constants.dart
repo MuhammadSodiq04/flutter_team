@@ -1,6 +1,3 @@
-// const String adminEmail = "admin@gmail.com";
-// const defaultImageConstant = "Select Image";
-
 const baseUrl = "http://localhost/api/v1/";
 
 class TimeOutConstants {

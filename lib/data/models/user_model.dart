@@ -19,23 +19,23 @@ class UserModel {
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        id: json["id"] as int? ?? 0,
-        fullName: json["full_name"],
-        email: json["email"],
-        phoneNumber: json["phone_number"],
-        profilePhoto: json["profile_photo"],
-        address: Address.fromJson(json["address"]),
-      );
+    id: json["id"] as int? ?? 0,
+    fullName: json["full_name"],
+    email: json["email"],
+    phoneNumber: json["phone_number"],
+    profilePhoto: json["profile_photo"],
+    address: Address.fromJson(json["address"]),
+  );
 
   Map<String, dynamic> toJson() => {
-        "full_name": fullName,
-        "projectName": projectName,
-        "categoryId": categoryId,
-        "email": email,
-        "phone_number": phoneNumber,
-        "profile_photo": profilePhoto,
-        "address": address.toJson(),
-      };
+    "full_name": fullName,
+    "projectName": projectName,
+    "categoryId": categoryId,
+    "email": email,
+    "phone_number": phoneNumber,
+    "profile_photo": profilePhoto,
+    "address": address.toJson(),
+  };
 }
 
 class Address {
@@ -50,14 +50,14 @@ class Address {
   });
 
   factory Address.fromJson(Map<String, dynamic> json) => Address(
-        name: json["name"],
-        lat: json["lat"]?.toDouble(),
-        long: json["long"]?.toDouble(),
-      );
+    name: json["name"],
+    lat: json["lat"]?.toDouble(),
+    long: json["long"]?.toDouble(),
+  );
 
   Map<String, dynamic> toJson() => {
-        "name": name,
-        "lat": lat,
-        "long": long,
-      };
+    "name": name,
+    "lat": lat,
+    "long": long,
+  };
 }
