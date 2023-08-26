@@ -39,7 +39,7 @@ void main() {
           ),
         ), BlocProvider(
           create: (context) => HomeCubit(
-            homeRepository: context.read<CategoryRepository>(),
+            homeRepository: context.read<HomeRepository>(),
           ),
         ),
       ], child: const MainApp())));
