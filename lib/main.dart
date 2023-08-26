@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_team/cubits/auth/auth_cubit.dart';
 import 'package:flutter_team/cubits/category/category_cubit.dart';
+import 'package:flutter_team/cubits/home/home_cubit.dart';
 import 'package:flutter_team/cubits/tab_cubit/tab_cubit.dart';
 import 'package:flutter_team/data/network/api_service.dart';
 import 'package:flutter_team/data/repository/auth_repo/auth_repository.dart';
 import 'package:flutter_team/data/repository/category/category_repository.dart';
+import 'package:flutter_team/data/repository/home/home_repository.dart';
 import 'package:flutter_team/ui/profile_screen/profile_screen.dart';
 import 'package:flutter_team/ui/tab_box.dart';
 
@@ -18,6 +20,8 @@ void main() {
         ),
         RepositoryProvider(
           create: (context) => CategoryRepository(apiService: ApiService()),
+        ),RepositoryProvider(
+          create: (context) => HomeRepository(apiService: ApiService()),
         ),
       ],
       child: MultiBlocProvider(providers: [
@@ -32,6 +36,10 @@ void main() {
         BlocProvider(
           create: (context) => CategoryCubit(
             categoryRepositories: context.read<CategoryRepository>(),
+          ),
+        ), BlocProvider(
+          create: (context) => HomeCubit(
+            homeRepository: context.read<CategoryRepository>(),
           ),
         ),
       ], child: const MainApp())));
